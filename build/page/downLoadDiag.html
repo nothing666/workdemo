@@ -1,0 +1,28 @@
+
+<div ><input type=radio name=selectType value="1" onpropertychange="changeStatus(this,downLoadSelected);">下载选中条目</div> 
+<div id="downLoadSelected" class="code"></div> 
+
+<div><input type=radio name=selectType value="0" onpropertychange="changeStatus(this,downLoadAll);">下载全部</div> 
+<div id="downLoadAll" class="code"></div> 
+
+<div style="text-align:right;padding:5px;bottom:50px;left:5px;position:absolute"><span id="tips_message" style="color:red;"></span></div>
+
+
+
+<form id="download_form" action="" method="post" >
+	<input type="hidden" name="idStr" id="idStr" />
+</form>
+
+<script> 
+
+function changeStatus(selectType,selectId){ 
+    if(selectType.checked){ 
+    	selectId.style.display="block"; 
+    }else{ 
+    	selectId.style.display="none"; 
+    } 
+} 
+
+</script> 
+
+

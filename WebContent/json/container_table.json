@@ -1,0 +1,25 @@
+﻿{"result":[
+	
+	{	
+		"bigTitleCode":"sfxx",
+		"bigTitleName":"乘车信息",
+		"bigTitleNum":"30",
+		"bigIconNum":1,
+		"opened":"n",
+		"containerType":"1",
+		"smallTitle":[
+			{
+				"smallTitleCode":"ccjl",
+				"smallTitleName":"乘车记录",
+				"smallTitleNum":"5",
+				"smallIconNum":"4"
+			},
+			{
+				"smallTitleCode":"dpjl",
+				"smallTitleName":"订票记录",
+				"smallTitleNum":"10",
+				"smallIconNum":"4"
+			}
+		]
+	}
+]}

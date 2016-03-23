@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/*重置*/
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td {margin:0; padding:0;}
+body,button,input,select,textarea {font:12px/1.5 tahoma,arial,simsun,sans-serif;}
+body {background-color:#fff; color:#666666;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;}
+address,cite,dfn,em,var {font-style:normal;}
+code,kbd,pre,samp {font-family:courier new,courier,monospace;}
+small {font-size:12px;}
+ul,ol {list-style:none;}
+a {color:#333; text-decoration:none;}
+a:hover {text-decoration:underline;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+legend {color:#000;}
+fieldset,img {border:0;}
+button,input,select,textarea {font-size:100%;}
+table {border-collapse:collapse; border-spacing:0;}
+caption,th {text-align:left;}
+
+
+/*浮动*/
+.left {float:left;}
+.right {float:right;}
+.clearfix:after {visibility: hidden; display: block; clear: both; height: 0; font-size: 0; content: ".";}
+.clearfix{zoom:1;}
+html{height:100%;}
+body{height:100%; background:url(images/bg.png) no-repeat fixed;}

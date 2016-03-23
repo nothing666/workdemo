@@ -1,0 +1,146 @@
+/*基本表格样式*/
+.tableStyle{
+ 	border-collapse: collapse;
+	border: 1px solid #cccccc;
+	width: 100%;
+	background-color: White;
+}
+.noBottomLine{
+	border-bottom:0!important;
+}
+.th{
+	border-left: 1.0pt solid windowtext;
+	border-right: 1.0pt solid windowtext;
+	word-wrap: normal;
+	word-break: keep-all;
+	overflow:hidden;
+	border-color: #cccccc;
+	height:28px; 
+	padding: 0 2px 0 4px;
+	color:#000000;
+	background-image: url(../icons/th_bg.jpg);
+	background-repeat: repeat-x;
+	font-weight: normal;
+	line-height:28px; 
+}
+.th_over{
+	border-left: 1.0pt solid windowtext;
+	border-right: 1.0pt solid windowtext;
+	word-wrap: normal;
+	word-break: keep-all;
+	overflow:hidden;
+	border-color: #cccccc;
+	height:28px; 
+	padding: 0 2px 0 4px;
+	color:#000000;
+	background-image: url(../icons/th_bg_over.jpg);
+	background-repeat: repeat-x;
+	font-weight: normal;
+	line-height:28px; 
+}
+.tableStyle td{
+	border-left: 1.0pt solid windowtext;
+	border-right: 1.0pt solid windowtext;
+	border-bottom: 1.0pt solid windowtext;
+	word-wrap: normal;
+	word-break: keep-all;
+	border-color: #cccccc;
+	height:24px; 
+	padding: 1px 2px 1px 4px;
+	color:#333333;
+}
+/*基本表格样式*/
+
+/*表格隔行颜色、鼠标移入某行颜色、选中某行颜色*/
+tr.odd{ 
+	background:#f7f7f7;
+}
+tr.highlight{ 
+	background:#eaf6fc;/*鼠标移入高亮色*/
+}
+tr.selected{ 
+	background:#d9ebf5;/*点击后背景色*/
+	background-image: url(../icons/trhl_bg.jpg);
+	background-repeat:repeat-x;
+}
+/*表格隔行颜色、鼠标移入某行颜色、选中某行颜色*/
+
+/*表格排序*/
+.sort_off{
+	background-image: url(../icons/arrow_off.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+	cursor:pointer;
+	cursor:hand;
+	display:block;
+	width:100%;
+}
+.sort_up{
+	background-image: url(../icons/arrow_up.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+	cursor:pointer;
+	cursor:hand;
+	display:block;
+	width:100%;
+}
+.sort_down{
+	background-image: url(../icons/arrow_down.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+	cursor:pointer;
+	cursor:hand;
+	display:block;
+	width:100%;
+}
+ /*表格排序*/
+
+ /*全选*/
+  .img_checkAllOff{
+	background-image: url(../icons/checkAllOff.gif);
+	background-repeat: no-repeat;
+	width: 13px;
+	height: 13px;
+	display: block;
+	padding:0 0 0 4px;
+	background-position:100% 0%;
+	cursor:pointer;
+	cursor:hand;
+}
+.img_checkAllOn{
+	background-image: url(../icons/checkAllON.gif);
+	background-repeat: no-repeat;
+	width: 13px;
+	height: 13px;
+	display: block;
+	padding:0 0 0 4px;
+	background-position:100% 0%;
+	cursor:pointer;
+	cursor:hand;
+}
+ /*全选*/
+
+/*自定义的树形表格*/
+.img_add2{
+	background-image: url(../icons/butCollapse.gif);
+	background-repeat: no-repeat;
+	background-position:100% 100%;
+	width: 20px;
+	height: 16px;
+	display: block;
+	float: left;
+}
+.img_remove2{
+	background-image: url(../icons/butExpand.gif);
+	background-repeat: no-repeat;
+	background-position:100% 100%;
+	width: 20px;
+	height: 16px;
+	display: block;
+	float: left;
+}
+.hand{
+	cursor:pointer;
+	cursor:hand;
+}
+/*自定义的树形表格*/

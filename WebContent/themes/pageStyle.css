@@ -1,0 +1,60 @@
+.float_left{
+	float:left;
+}
+.float_right{
+	float:right;
+}
+.clear{
+	clear:both;
+}
+.padding5{
+	padding:5px;
+}
+.padding_top4{
+	padding-top:4px;
+}
+/*分页样式*/
+.paging{}
+.paging span{
+	display:block;
+	float:left;
+	margin:0 0 0 5px;
+	font-family: Arial;
+	padding:0!important;
+}
+.paging a{
+	padding:0 6px 0 6px!important;
+	border:solid 1px #cccccc;
+	background-color:#edf7f9;
+	height:19px;
+	line-height:19px;
+}
+.paging a:hover{
+	color:white;
+	text-decoration:none;
+	background-color:#3366cc;/*鼠标悬停背景色*/
+	border:solid 1px #193d84;/*鼠标悬停边框色*/
+}
+.paging_disabled a{
+	color:#cccccc!important;
+	cursor:default!important;
+}
+.paging_disabled a:hover{
+	color:#cccccc!important;
+	background-color:#edf7f9!important;
+	border:solid 1px #cccccc!important;
+}
+.paging_current a{
+	color:white!important;
+	cursor:default!important;
+	background-color:#3366cc!important;/*鼠标悬停背景色*/
+	border:solid 1px #193d84!important;/*鼠标悬停边框色*/
+}
+/*分页样式*/
+.pagingWrapper{height:35px; line-height:35px; background:#f1f1f1;}
+.paging_qjs a:hover{color:#3399ff;}
+.pageNum{width:40px; height:17px; text-align:center;}
+.prePage,.nextPage{margin-right:10px;}
+.indexPage,.pageNum{margin-right:5px;}
+.enter{display:inline-block; width:40px; height:20px; margin-right:10px; margin-left:5px; border:1px solid #cccccc; line-height:20px; text-align:center;}
+.enter:hover{border:1px solid #3399ff; text-decoration:none;} 

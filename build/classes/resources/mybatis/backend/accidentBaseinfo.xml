@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjrun.autodata.dao.mapper.backend.AccidentBaseinfoMapper">
+
+	<!--Cache 配置 -->
+	<cache   eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>	
+	
+	
+	<sql id="fields">accidentplace,accidentcasualtiesid,accidentform,accidentdetailid,
+			accidentsiteform,accidentprereason
+	</sql>
+	<sql id="select">SELECT accidentid,<include refid="fields"/> FROM accident_baseinfo</sql>
+	<sql id="pueryParams">
+		<if test="accidentid != null">
+		    AND accidentid = #{accidentid} 
+		</if>
+		
+		<!--
+			<if test="multiXm != null ">
+			   AND (  
+	   		 <foreach collection="multiXm" index="index" item="item"  separator="OR" >
+	 	 		PASSENGER like '%${item}%'  
+	  		</foreach>
+			  )
+			</if>
+		-->
+	
+	</sql>
+
+
+	<select id="selectPage" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<include refid="select"/> 
+			WHERE 1=1
+		<include refid="pueryParams"/>
+		 ORDER BY  accidentid desc , ${sort} ${order}
+	</select>
+	
+	<select id="selectCount"  parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	    SELECT COUNT(0) FROM accident_baseinfo
+	      WHERE  1=1 
+		 <include refid="pueryParams"/>
+	</select>
+	
+	<select id="selectPieDataByAccidentReason" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+			SELECT accidentid,accidentplace,accidentcasualtiesid,accidentform,accidentdetailid,
+			accidentsiteform,accidentprereason,count(*) totalCount  
+			FROM accident_baseinfo t  
+			 WHERE  1=1 
+		 <include refid="pueryParams"/>
+			GROUP BY t.accidentprereason
+			ORDER BY   ${sort} ${order}
+	</select>
+																																
+	
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<!-- <context:component-scan base-package="com.zz.oa.service">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan> -->
+	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="locations" value="classpath:jdbc.properties" /> </bean> -->
+	<context:property-placeholder location="classpath:/resources/jdbc.properties" />
+
+	<!-- 配置要扫描的xxxMapper.xml -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bjrun.autodata.dao.mapper.backend" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+
+ 
+  	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${pwd}" />
+	</bean>
+
+<!-- 	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${driver}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="user" value="${user}" />
+		<property name="password" value="${pwd}" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="30" />
+		<property name="maxIdleTime" value="5" />
+		<property name="acquireIncrement" value="5" />
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="5" />
+		<property name="idleConnectionTestPeriod" value="1" />
+	</bean>  -->
+	<!-- sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:resources/mybatis/mybatis-config.xml" />
+	</bean>
+
+	<!-- 事务注解的配置@Transaction -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<!--  GIS 配置 --><!--
+	 配置要扫描的Mapper.xml 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bjrun.autoData.dao.mapper.track" />
+		<property name="sqlSessionFactoryBeanName" value="gisSqlSessionFactory"/>
+	</bean>
+	
+	--><!--
+
+
+     <bean id="dataSourceGis"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url_gis}" />
+		<property name="username" value="${user_gis}" />
+		<property name="password" value="${pwd_gis}" />
+	</bean> 
+	
+--><!-- 	<bean id="dataSourceGis" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${driver}" />
+		<property name="jdbcUrl" value="${url_gis}" />
+		<property name="user" value="${user_gis}" />
+		<property name="password" value="${pwd_gis}" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="30" />
+		<property name="maxIdleTime" value="5" />
+		<property name="acquireIncrement" value="5" />
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="5" />
+		<property name="idleConnectionTestPeriod" value="1" />
+	</bean> -->
+	<!-- sqlSessionFactory --><!--
+	<bean id="gisSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceGis" />
+		<property name="configLocation" value="classpath:resources/mybatis/mybatis-gis-config.xml" />
+	</bean>
+	
+--></beans>

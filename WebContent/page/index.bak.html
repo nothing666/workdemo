@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>rail用户全息分析</title>
+</head>
+<body>
+
+<!-- <iframe id="NetRelationPage" style="width:1580px;height:730px;" src="http://15.48.190.198:8080/NetRelation/index.jsp"></iframe> -->
+
+ <iframe id="NetRelationPage" style="width:1580px;height:730px;" src="http://15.48.190.217:8080/NetRelation/index.jsp"></iframe> 
+ 
+<script type="text/javascript">
+function sendMsg() {
+	/* var queryContext = {};
+	queryContext['pageNo'] = 1;
+	queryContext['pageSize'] = 50000;
+	queryContext['dataRangeId'] = '2_7,2_7_1,2_7_2,2_6,2_13,2_2,2_2_1,2_2_2,2_4,2_5,2_5_1,2_5_2,2_1,2_3,2_3_1,2_3_2,2_8,2_10,2_10_1,2_10_2,2_12,2_9';
+	queryContext['andOr'] = 'or';
+	
+	var queryParams = [{type:'姓名', value: '张三'}, {type:'邮箱', value: 'zhangsan@mail.com'}, {type:'手机号', value: '15778515498'}, {type:'域名', value: 'qq.com'}];
+	var showTypes = ['姓名', '其它邮箱', '手机号码', 'QQ账号', '域名'];
+	var centerType = '姓名';
+	var hideRtBtns = ['fileImport', 'findFile', 'time', 'timeAnalysis'];
+	
+	var qp = {'queryContext': queryContext, 'queryParams': queryParams, 'showTypes': showTypes, 'centerType': centerType, 'hideRtBtns': hideRtBtns};
+
+	var msg = {
+		app : 'fin_rail',
+		head : 'call',
+		body : {
+			method : 'queryByRail',
+			params : qp
+		}
+	}; */
+	document.getElementById('NetRelationPage').contentWindow.postMessage(msg, '*');
+}
+
+//解析url中的参数 begin
+
+//获取url中？后面的参数
+var queryContext = {};
+queryContext['pageNo'] = 1;
+queryContext['pageSize'] = 50000;
+queryContext['dataRangeId'] = '2_7,2_7_1,2_7_2,2_6,2_13,2_2,2_2_1,2_2_2,2_4,2_5,2_5_1,2_5_2,2_1,2_3,2_3_1,2_3_2,2_8,2_10,2_10_1,2_10_2,2_12,2_9';
+queryContext['andOr'] = 'or';
+	
+var queryParams = [];
+var qp = {};
+var showTypes = ['姓名', '邮箱','其它邮箱', '手机号码','固定电话号码',
+                 'QQ账号','MSN账号','QQ群号','飞信账号','微信账号','其它IM账号','其它微博',
+                 'MAC','身份证','其它证件号码','其它网络账号',
+                 'IMSI','IMEI','域名','ADSL','MAC',
+                 'IP','基站'];
+var centerType = '姓名';
+var hideRtBtns = ['fileImport', 'findFile', 'time', 'timeAnalysis'];
+
+var para = decodeURI(decodeURI(window.location.search.substring(1)));
+if (para.length > 0){
+	//通过&区分各个参数
+	var paraArra = para.split('&');
+	var paraLen = paraArra.length;
+	
+	for(var i =0 ; i < paraLen; i++){
+		
+		//获取每个参数名以及参数值，参数名与参数值以"="分隔
+		var keyArra = paraArra[i].split('=');
+		if(keyArra[1] == ""){
+			continue; 
+		}
+	 	
+		var key = keyArra[0];
+		var value = keyArra[1];
+		
+		var queryParam = {};
+		//queryParam.value = value;	
+		
+		if(key == "name"){
+			pushMultiValue('姓名',value,queryParams);		
+		}else if (key == "bookingMail"){
+			pushMultiValue('邮箱',value,queryParams);	
+		} else if(key == "authAccount"){
+			pushMultiValue('网络账号',value,queryParams);
+		}else if(key == "certificateCode"){
+			pushMultiValue('身份证',value,queryParams);	
+		}else if(key == "imei"){
+			pushMultiValue('imei',value,queryParams);	
+		}else if(key == "imsi"){
+			pushMultiValue('imsi',value,queryParams);	
+		}else if(key == "mobile"){
+			pushMultiValue('手机号',value,queryParams);
+		}else if(key == "sourceMac"){
+			pushMultiValue('MAC',value,queryParams);
+		} else if(key == "station"){
+			pushMultiValue('基站',value,queryParams);
+		} 
+
+	}
+}
+
+qp.queryContext = queryContext;
+qp.queryParams = queryParams;
+qp.showTypes = showTypes;
+qp.centerType = centerType;
+qp.hideRtBtns = hideRtBtns;
+
+var msg = {
+		app : 'fin_rail',
+		head : 'call',
+		body : {
+			method : 'queryByRail',
+			params : qp
+		}
+	};
+
+ window.addEventListener("message", function( event ) {
+	var data = event.data;
+	if (data.app == 'NetRelation') { 
+		if (data.head == 'init') {
+			sendMsg();
+			
+		}
+	}
+}, false);  
+
+ function pushMultiValue(keyType,value,queryParams){
+	 if(value && value.length > 0){
+		 var valueArr = value.split(',');
+		 var len = valueArr.length;
+		 for(var i =0 ; i< len; i++){
+			 if(valueArr[i] != ''){
+				 var queryParam = {};
+				 queryParam.type = keyType;
+				 queryParam.value = valueArr[i];
+				 queryParams.push(queryParam); 
+			 }
+		 }
+	 }
+ }
+
+</script>
+
+</body>
+</html>

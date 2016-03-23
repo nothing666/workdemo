@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<iframe id="NetRelationPage" style="width:1400px;height:730px;" src="http://192.168.1.183:8080/NetRelation/index.jsp"></iframe>
+
+<script type="text/javascript">
+function sendMsg() {
+	var queryParams = [{type:'姓名', value: '张三'}, {type:'邮箱', value: 'zhangsan@mail.com'}, {type:'手机号', value: '13987744441'}];
+	var showTypes = ['姓名', '其它邮箱', '手机号码', 'QQ账号'];
+	var centerType = '姓名';
+	var hideRtBtns = ['fileImport', 'findFile', 'time', 'timeAnalysis'];
+	
+	var qp = {'queryParams': queryParams, 'showTypes': showTypes, 'centerType': centerType, 'hideRtBtns': hideRtBtns};
+
+	var msg = {
+		app : 'fin_rail',
+		head : 'call',
+		body : {
+			method : 'queryByRail',
+			params : qp
+		}
+	};
+	document.getElementById('NetRelationPage').contentWindow.postMessage(msg, '*');
+}
+
+window.addEventListener("message", function( event ) {
+	var data = event.data;
+	if (data.app == 'NetRelation') { 
+		if (data.head == 'init') {
+			sendMsg();
+		}
+	}
+}, false);
+</script>
+
+</body>
+</html>

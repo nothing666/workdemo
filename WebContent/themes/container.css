@@ -1,0 +1,66 @@
+@charset "utf-8";
+/*******************
+编写:董亚军
+联系方式：yajun@run.com
+日期：2015-01-26
+版本：RD 1.0
+描述：创建容器组件基础版本样式
+*******************/
+/*左侧开始*/
+.basicOuter{padding-bottom:10px;}
+.title{height:32px; line-height:32px; background:url(images/titlecenter.png) repeat-x;}
+.titleLeft{width:14px; height:32px; background:url(images/titleleft.png) no-repeat;}
+.titleRight{width:14px; height:32px; background:url(images/titleright.png) no-repeat;}
+.titleName{line-height:28px; margin-right:10px; color:#fff; font-size:14px; font-weight:normal; font-family:"微软雅黑";}
+.titleNum{line-height:28px; color:#fff;}
+.communication{margin:5px 3px 0px 7px; background-color:#fff; border-right:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0; border-left:1px solid #e0e0e0;}
+.innerTitle{height:21px; line-height:21px; background:url(images/innertitlecenter.png) repeat-x; border-bottom:1px solid #e0e0e0;}
+.innerTitleLeft{width:5px; height:21px; background:url(images/innertitleleft.png) no-repeat left;}
+.innerTitleRight{width:5px; height:21px; background:url(images/innertitleright.png) no-repeat right;}
+.innerTitleName{color:#fff; font-family:"微软雅黑"; font-weight:normal;}
+.innerTitleNum{margin:0px 5px; color:#fff;}
+.icon_1{width:12px; height:14px; margin:7px 5px 0px 5px; background:url(images/icon_1.png) no-repeat;}
+.icon_2{width:12px; height:14px; margin:7px 5px 0px 5px; background:url(images/icon_2.png) no-repeat;}
+.icon_3{width:13px; height:14px; margin-top:4px; margin-right:5px; margin-left:3px; background:url(images/icon_3.png) no-repeat;}
+.titleSch{position:relative; width:24px; margin:0px 7px 0px 0px; padding:3px 5px;}
+.titleSlt{background:url(images/titleschhd_1.png) no-repeat;}
+.titleSch a.titleSchSwitch{display:block; width:22px; height:22px; margin:0px auto; background:url(images/titlesch.png) no-repeat;}
+.titleSch a.titleSchSwitch:hover{background:url(images/titlesch_hover.png) no-repeat;}
+.titleSlt a.titleSchSwitch{width:22px; height:20px; background:url(images/titlesch_hover.png) no-repeat;}
+.titleSchBar{display:none; position:absolute; top:24px; left:-80px; width:152px; height:30px; background:url(images/titleschbd_1.png) no-repeat; z-index:10;}
+.titleSlt .titleSchBar{display:block;}
+.titleSchLink{width:33px; height:22px; margin:5px 0px 0px 1px; background:url(images/titleschbtn_gray.png) no-repeat; color:#666666; text-align:center; line-height:22px;}
+.titleSchInput{width:92px; height:24px; line-height:24px; margin:5px 0px 0px 3px; padding:0px 10px; background:url(images/titleschinput_gray.png) no-repeat; border:none;}
+.titleExport{width:22px; height:22px; margin:3px 12px 0px 0px; background:url(images/titleexport.png) no-repeat;}
+.titleExport:hover{background:url(images/titleexport_hover.png) no-repeat;}
+.titleSwitch_1{width:22px; height:22px; margin:3px 4px 0px 0px; background:url(images/titleswitch_1.png) no-repeat;}
+.titleSwitch_1:hover{background:url(images/titleswitch_1_hover.png) no-repeat;}
+.titleSwitch_2{width:22px; height:22px; background:url(images/titleswitch_2.png) no-repeat;}
+.titleSwitch_2:hover{background:url(images/titleswitch_2_hover.png) no-repeat;}
+.titleOpenLog,.titleOpenObj{width:22px; height:22px; margin:3px 5px 0px 0px; background:url(images/titleopen.png) no-repeat;}
+.titleOpenLog:hover,.titleOpenObj:hover{background:url(images/titleopen_hover.png) no-repeat;}
+.titleCloseLog,.titleCloseObj{width:22px; height:22px; margin:3px 5px 0px 0px; background:url(images/titleclose.png) no-repeat;}
+.titleCloseLog:hover,.titleCloseObj:hover{background:url(images/titleclose_hover.png) no-repeat;}
+.innerTitleSwitch_1{width:17px; height:17px; margin:3px 10px 0px 0px; background:url(images/innertitleswitch_3.png) no-repeat;}
+.innerTitleSwitch_1:hover{background:url(images/innertitleswitch_3_hover.png) no-repeat;}
+.innerTitleSwitch_2{background:url(images/innertitleswitch_4.png) no-repeat;}
+.innerTitleSwitch_2:hover{background:url(images/innertitleswitch_4_hover.png) no-repeat;}
+.innerTitleExport{width:17px; height:17px; margin:2px 10px 0px 0px; background:url(images/innertitleexport.png) no-repeat;}
+.innerTitleExport:hover{background:url(images/innertitleexport_hover.png) no-repeat;}
+.innerTitleSet{width:17px; height:17px; margin:2px 10px 0px 0px; background:url(images/innertitleset_1.png) no-repeat;}
+.innerTitleSet:hover{background:url(images/innertitleset_1_hover.png) no-repeat;}
+
+.hide{display:none;}
+.tabsWrapper{margin:0px 9px 10px 6px;}
+/*.tabContent{width:1500px; padding-top:2px; line-height:20px; border:1px solid #dcdcdc; background:url(images/tabbg_border.png) repeat-x top #f1f1f1; color:#717374;}*/
+.tabRight{position:relative; left:0px; top:1px; height:23px; padding-right:25px; background:url(images/tab_right.png) no-repeat right center;}
+.tabLeft{height:23px; padding-left:5px; background:url(images/tab_left.png) no-repeat left center;}
+.tabCenter{display:block; height:23px; padding-left:10px; background:url(images/tab_center.png) repeat-x; line-height:23px; color:#717374;}
+.tabCenter:hover{text-decoration:none;}
+.tabCenter span{margin-left:10px;}
+.selected{background:url(images/tabsel_right.png) no-repeat right center;}
+.selected .tabLeft{background:url(images/tabsel_left.png) no-repeat left center;}
+.selected .tabCenter{background:url(images/tabsel_center.png) repeat-x;}
+.kpContain .basicOuter .basicInner:after {visibility: hidden; display: block; clear: both; height: 0; font-size: 0; content: ".";}
+.kpContain .basicOuter .basicInner{zoom:1;}
+.kpContain .basicInner .communication {float:left;}

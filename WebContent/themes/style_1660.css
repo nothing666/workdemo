@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+/*.content{position:relative; width:1660px; margin:0px auto; background:url(../images/contentbg.png) repeat;}
+.typeShow{display:none; position:absolute; top:28px; left:0px; width:1380px; margin-left:85px; padding:5px 80px 5px 80px; background-color:#f0efeb; border:1px solid #bababa; z-index:4;}
+.identityCard{display:none; position:absolute; top:43px; left:0px; width:1568px; margin:0px 40px; background-color:#f0efeb; border:1px solid #bababa; z-index:7;}
+.leftSide{width:1331px;}
+
+.detailInfo{width:1524px; margin-left:5px; background:#FFF;}
+.infoItems{width:1425px;}
+.basicL{width:485px; padding-left:10px;}
+.basicR{width:419px; padding-left:10px;}
+.tabContent{width:1500px; padding-top:2px; line-height:20px; border:1px solid #dcdcdc; background:url(images/tabbg_border.png) repeat-x top #f1f1f1; color:#717374;}
+.groupDetails{width:1290px; border-left:1px solid #dcdcdc;}
+.detailsCont{width:1480px; margin-left:115px;}*/
+
+
+
+
+
+
+
+.content{position:relative; width:1590px; margin:0px auto; background:url(../images/contentbg.png) repeat;}
+.typeShow{display:none; position:absolute; top:28px; left:0px; width:1245px; margin-left:85px; padding:5px 80px 5px 80px; background-color:#f0efeb; border:1px solid #bababa; z-index:10;}
+.identityCard{display:none; position:absolute; top:43px; left:0px; width:1498px; margin:0px 40px; background-color:#f0efeb; border:1px solid #bababa; z-index:7;}
+.leftSide{width:1261px;}
+
+.detailInfo{width:1454px; margin-left:5px; background:#FFF;}
+.infoItems{width:1355px;}
+.basicL{width:415px; padding-left:10px;}
+.basicR{width:419px; padding-left:10px;}
+.tabContent{width:1438px; padding-top:2px; line-height:20px; border:1px solid #dcdcdc; background:url(../images/tabbg_border.png) repeat-x top #f1f1f1; color:#717374;}
+.groupDetails{width:1220px; border-left:1px solid #dcdcdc;}
+.detailsCont{width:1410px; margin-left:115px;}
+.details .infoItem{width:1525px;}
+.barRight{position:fixed; top:44px; width:1585px; height:41px; line-height:41px; padding-right:5px; background:url(images/barright.png) no-repeat right; z-index:11;}/****************************************************************************************************************************************************/
+/*#div_table{width:1720px; margin:0px auto 0px auto; padding:10px 5px; background-color:#fff;}*/

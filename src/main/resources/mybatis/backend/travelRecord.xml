@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjrun.autodata.dao.mapper.backend.TravelRecordMapper">
+
+	<!--Cache 配置 -->
+	<cache   eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>	
+	
+	
+	<sql id="fields">BOOKINGMAIL,BOOKER,TICKETORDER,PASSENGER,TRAINNUMBER,
+					 GRADE,CARRIAGE,SEAT,DEPARTURESTATION,TERMINALSTATION,
+					 TRAINTIME,ARRIVETIME,MOBILE,CERTIFICATECODE,PTYPE</sql>
+	<sql id="select">SELECT ID,<include refid="fields"/> FROM V_RUN_TRAVEL_RECORD</sql>
+	<sql id="pueryParams">
+		<if test="id != null">
+		    AND ID = #{id} 
+		</if>
+		<!-- <if test="passenger != null  and passenger != ''">
+		    AND PASSENGER  LIKE '%${passenger}%' 
+		</if> -->
+		
+		<if test="multiXm != null ">
+		   AND (  
+   		 <foreach collection="multiXm" index="index" item="item"  separator="OR" >
+ 	 		PASSENGER like '%${item}%'  
+  		</foreach>
+		  )
+		</if>
+		<if test="multiSjh != null ">
+		   AND (  
+   		 <foreach collection="multiSjh" index="index" item="item"  separator="OR" >
+ 	 		MOBILE like '%${item}%'  
+  		</foreach>
+		  )
+		</if>
+		
+		 <if test="multiSfzh != null ">
+		   AND (  
+   		 <foreach collection="multiSfzh" index="index" item="item"  separator="OR" >
+ 	 		UPPER(CERTIFICATECODE) like UPPER('%${item}%')  
+  		</foreach>
+		  )
+		</if>
+		
+		<if test="multiDpyx != null ">
+		   AND (  
+   		 <foreach collection="multiDpyx" index="index" item="item"  separator="OR" >
+ 	 		UPPER(BOOKINGMAIL) like UPPER('%${item}%')  
+  		</foreach>
+		  )
+		</if>
+		
+		<if test="multiCc != null ">
+		   AND (  
+   		 <foreach collection="multiCc" index="index" item="item"  separator="OR" >
+ 	 		UPPER(TRAINNUMBER) like UPPER('%${item}%')  
+  		</foreach>
+		  )
+		</if>
+		
+		<if test="multiCfd != null ">
+		   AND (  
+   		 <foreach collection="multiCfd" index="index" item="item"  separator="OR" >
+ 	 		DEPARTURESTATION LIKE '%${item}%' OR DCITY LIKE '%${item}%' 
+  		</foreach>
+		  )
+		</if>
+		
+		<if test="multiMdd != null ">
+		   AND (  
+   		 <foreach collection="multiMdd" index="index" item="item"  separator="OR" >
+ 	 		TERMINALSTATION LIKE '%${item}%' OR TCITY LIKE '%${item}%' 
+  		</foreach>
+		  )
+		</if>
+
+		<!-- <if test="terminalStation != null and terminalStation !=''">
+		    AND (TERMINALSTATION LIKE '%${terminalStation}%' OR TCITY LIKE '%${terminalStation}%' )
+		</if> -->
+		
+		<if test="beginTime != null ">
+		    AND TRAINTIME &gt;= #{beginTime,jdbcType=TIMESTAMP} 
+		</if>
+		<if test="endTime != null ">
+		    AND TRAINTIME &lt;= #{endTime,jdbcType=TIMESTAMP} 
+		</if>
+		
+		<!--   配合前台的户籍地查询、传递过来的参数为'41','42'		 -->    
+		<if test="provinceList != null ">
+		    AND substr(NVL(CERTIFICATECODE,'0000'), 1,2 ) in 
+		  <foreach collection="provinceList" index="index" item="item" open="(" separator="," close=")">
+		 	 ${item}
+		  </foreach>
+		</if>
+		
+		<if test="pType != null  and pType != ''">
+		    AND PTYPE = #{pType} 
+		</if>
+	</sql>
+	
+	
+	<sql id="keyWordParams">
+		<if test="secondSearch != null and secondSearch != ''">
+		    AND ( BOOKINGMAIL LIKE '%${secondSearch}%' 
+		          OR PASSENGER LIKE '%${secondSearch}%' 
+		          OR TRAINNUMBER LIKE '%${secondSearch}%' 
+		          OR DEPARTURESTATION LIKE '%${secondSearch}%' 
+				  OR DCITY LIKE '%${secondSearch}%' 
+				  OR TERMINALSTATION LIKE '%${secondSearch}%' 
+				  OR TCITY LIKE '%${secondSearch}%'
+				  OR MOBILE LIKE '%${secondSearch}%'
+				  OR CERTIFICATECODE LIKE '%${secondSearch}%'
+		          
+		    <!-- OR BOOKER LIKE '%${secondSearch}%'
+		    OR TICKETORDER LIKE '%${secondSearch}%'
+		    OR GRADE LIKE '%${secondSearch}%' 
+		    OR CARRIAGE LIKE '%${secondSearch}%'  
+		    OR SEAT LIKE '%${secondSearch}%' -->
+		     )
+		</if>
+	</sql>
+	
+	<sql id="kpKeyWordParams">
+		<if test="secondSearch != null and secondSearch != ''">
+		    AND ( BOOKINGMAIL LIKE '%${secondSearch}%' 
+		    	OR PASSENGER LIKE '%${secondSearch}%' 
+		     )
+		</if>
+	</sql>
+	
+	<!--年龄过滤规则
+	 1、当视图中，身份证号为空的不参与过滤（将身份证为空的，decode为9999）
+	 2、  通过当前的年份，比较身份证中的年份
+	 -->
+	<sql id="ageParams">
+		<if test="beginAge > 0 ">
+		   	<!-- AND ( 
+		   	     to_number(decode(CERTIFICATECODE,null,'9999', substr(CERTIFICATECODE,7,4 ))) &lt;= to_char(sysdate,'yyyy') - #{beginAge}
+		   		 OR to_number(decode(CERTIFICATECODE,null,'9999', substr(CERTIFICATECODE,7,4 ))) = 9999
+		   	    ) -->
+		   	 AND ( 
+		   	     to_number(substr(NVL(CERTIFICATECODE,'000000000'), 7,4 )) &lt;= to_char(sysdate,'yyyy') - #{beginAge}
+		   	    )   
+		   	    
+		</if>
+		<if test="endAge > 0 ">
+		   <!-- 	AND ( 
+		   	     to_number(decode(CERTIFICATECODE,null,'9999', substr(CERTIFICATECODE,7,4 ))) &gt;= to_char(sysdate,'yyyy') - #{endAge} 
+		   	     OR to_number(decode(CERTIFICATECODE,null,'9999', substr(CERTIFICATECODE,7,4 ))) = 9999
+		   	     )   -->  
+		   	     
+		   	     AND ( 
+		   	     to_number(substr(NVL(CERTIFICATECODE,'000000000'), 7,4 )) &gt;= to_char(sysdate,'yyyy') - #{endAge} 
+		   	     )	    
+		</if>
+	</sql>
+	
+
+	<select id="selectPage" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<include refid="select"/> 
+			WHERE 1=1
+		<include refid="pueryParams"/>
+		
+		<include refid="keyWordParams"/>
+		
+		<include refid="ageParams"/>
+		
+			ORDER BY  CERTIFICATECODE asc , ${sort} ${order}
+	</select>
+	
+	
+	<select id="quallAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<include refid="select"/> 
+			WHERE 1=1 
+		<include refid="pueryParams"/>
+		
+			ORDER BY TRAINTIME asc
+	</select>
+	
+	
+	<!--查询乘车人身份记录  begin -->
+	<select id="selectPassengerIdentityPage" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		 SELECT BOOKINGMAIL ,
+		    wm_concat(distinct BOOKER) BOOKER , 
+		 	wm_concat(distinct TICKETORDER) TICKETORDER ,
+		    wm_concat(distinct TRAINNUMBER) TRAINNUMBER ,
+		    wm_concat(distinct DEPARTURESTATION) DEPARTURESTATION ,
+		    wm_concat(distinct TERMINALSTATION) TERMINALSTATION ,
+		 	wm_concat(distinct PASSENGER) PASSENGER ,
+		 	wm_concat(distinct CERTIFICATECODE) CERTIFICATECODE,
+		 	wm_concat(distinct MOBILE) MOBILE 
+		 from V_RUN_TRAVEL_RECORD t 
+		    WHERE  1=1 
+		 <include refid="pueryParams"/>
+		 <include refid="kpKeyWordParams"/>
+		 <include refid="ageParams"/>
+		 group by bookingmail , passenger
+		 ORDER BY  ${sort} ${order} 
+	</select>
+	
+	<select id="selectPassengerIdentityCount"  parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	     select count(0)  from 
+	       ( select BOOKINGMAIL from V_RUN_TRAVEL_RECORD   
+	          WHERE  1=1 
+		      <include refid="pueryParams"/>
+		      <include refid="kpKeyWordParams"/>
+		      <include refid="ageParams"/>
+		   group by bookingmail  , passenger ) b 
+	</select>
+	<!--查询乘车人身份记录   end-->
+	
+	<!-- 供下载功能使用-->
+	<select id="queryByIdS"  resultType="java.util.HashMap">
+		<include refid="select"/> 
+		  WHERE  ID in 
+		  <foreach collection="array" index="index" item="id" open="(" separator="," close=")">
+		 	 #{id}
+		  </foreach>	  
+	</select>
+	
+    <!--数据量大时的默认下载 -->
+	<select id="query4DownLoad"  resultType="java.util.HashMap">
+		<include refid="select"/> 
+		WHERE ROWNUM &lt;= 5000
+		ORDER BY TRAINTIME DESC	  
+	</select>
+	
+	<select id="selectCount"  parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	    SELECT COUNT(0) FROM V_RUN_TRAVEL_RECORD
+	      WHERE  1=1 
+		 <include refid="pueryParams"/>
+		 <include refid="keyWordParams"/>
+		 <include refid="ageParams"/>
+	</select>
+																																
+	
+</mapper>

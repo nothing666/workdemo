@@ -1,0 +1,25 @@
+{"result":[
+	
+	{	
+		"bigTitleCode":"sfxx",
+		"bigTitleName":"身份信息",
+		"bigTitleNum":"30",
+		"bigIconNum":1,
+		"opened":"n",
+		"containerType":"1",
+		"smallTitle":[
+			{
+				"smallTitleCode":"dprsfxx",
+				"smallTitleName":"订票人身份信息",
+				"smallTitleNum":"12",
+				"smallIconNum":"4"
+			},
+			{
+				"smallTitleCode":"ccrsfxx",
+				"smallTitleName":"乘车人身份信息",
+				"smallTitleNum":"18",
+				"smallIconNum":"4"
+			}
+		]
+	}
+]}
